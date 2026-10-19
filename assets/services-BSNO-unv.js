@@ -78,7 +78,7 @@ function ServicesPage() {
   };
 
   const filteredServices = React.useMemo(() => {
-    const list = currentProducts && currentProducts.length ? currentProducts : allServices;
+    const list = currentProducts || [];
     return list.filter(service => {
       // Category filter
       if (selectedCategory !== "all") {
@@ -210,13 +210,13 @@ function ServicesPage() {
         }) : jsxs("div", {
           className: "py-16 text-center bg-card rounded-2xl border border-dashed border-border mt-4 w-full",
           children: [
-            jsx("p", { className: "text-lg font-medium", children: "No services found matching your query" }),
-            jsx("p", { className: "mt-1 text-sm text-muted-foreground", children: "Try adjusting your search terms or clearing the filter." }),
-            jsx("button", {
+            jsx("p", { className: "text-lg font-medium", children: (!currentProducts || currentProducts.length === 0) ? "No products added yet" : "No services found matching your query" }),
+            jsx("p", { className: "mt-1 text-sm text-muted-foreground", children: (!currentProducts || currentProducts.length === 0) ? "Products added from the Admin Panel will appear here automatically." : "Try adjusting your search terms or clearing the filter." }),
+            (currentProducts && currentProducts.length > 0) ? jsx("button", {
               onClick: () => { setSelectedCategory("all"); setSearchQuery(""); },
               className: "mt-4 px-5 py-2.5 rounded-full bg-primary text-primary-foreground text-xs font-semibold hover:opacity-90 transition cursor-pointer",
               children: "Reset All Filters"
-            })
+            }) : null
           ]
         }),
 

@@ -169,17 +169,13 @@ function ProductDetailPage() {
     if (id) {
       const found = productsList.find(p => p.id === id || p.id.toLowerCase() === id);
       if (found) return found;
-      const foundAlt = allServices.find(p => p.id === id || p.id.toLowerCase() === id);
-      if (foundAlt) return foundAlt;
     }
     if (name) {
       const found = productsList.find(p => p.name.toLowerCase() === name);
       if (found) return found;
-      const foundAlt = allServices.find(p => p.name.toLowerCase() === name);
-      if (foundAlt) return foundAlt;
     }
-    // Default fallback to first product
-    return productsList[0] || allServices[0];
+    // Default fallback to first product or null if catalog empty
+    return productsList[0] || null;
   }, [queryParams, productsList]);
 
   const [quantity, setQuantity] = React.useState(1);
