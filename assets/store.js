@@ -538,7 +538,15 @@ export function deleteProduct(id) {
 
 export function isAdminAuthenticated() {
   if (typeof window === 'undefined') return false;
-  return sessionStorage.getItem(ADMIN_AUTH_KEY) === 'true';
+  if (sessionStorage.getItem(ADMIN_AUTH_KEY) === 'true') return true;
+  try {
+    const u = JSON.parse(localStorage.getItem(USER_KEY) || 'null');
+    if (u && (u.isAdmin === true || (u.email && u.email.toLowerCase() === 'socialpeak@gmail.com') || (u.email && u.email.toLowerCase() === 'admin@gmail.com'))) {
+      sessionStorage.setItem(ADMIN_AUTH_KEY, 'true');
+      return true;
+    }
+  } catch (e) {}
+  return false;
 }
 
 export function loginAdmin(user, pass) {
@@ -561,6 +569,13 @@ export function loginAdmin(user, pass) {
 export function logoutAdmin() {
   if (typeof window !== 'undefined') {
     sessionStorage.removeItem(ADMIN_AUTH_KEY);
+    try {
+      const u = JSON.parse(localStorage.getItem(USER_KEY) || 'null');
+      if (u && (u.isAdmin || (u.email && u.email.toLowerCase() === 'socialpeak@gmail.com'))) {
+        localStorage.removeItem(USER_KEY);
+        window.dispatchEvent(new CustomEvent('socialpeak_auth_changed', { detail: null }));
+      }
+    } catch (e) {}
   }
 }
 

@@ -11,6 +11,7 @@ import {
   getUserOrders,
   addToCart
 } from "./store.js";
+import { component as AdminPage } from "./admin-DzkdhcEh.js";
 
 const React = getReact(getReactCore());
 const { jsx, jsxs } = getJsx();
@@ -108,6 +109,17 @@ function AccountPage() {
       setIsRewardRedeemed(false);
     }
   }, [currentUser]);
+
+  const isAdmin = currentUser && (
+    currentUser.isAdmin === true ||
+    (currentUser.email && currentUser.email.toLowerCase() === "socialpeak@gmail.com") ||
+    (currentUser.email && currentUser.email.toLowerCase() === "admin@gmail.com") ||
+    (typeof window !== "undefined" && sessionStorage.getItem("socialpeak_admin_auth") === "true")
+  );
+
+  if (isAdmin) {
+    return jsx(AdminPage, {});
+  }
 
   const handleRedeemReward = () => {
     addToCart({
