@@ -1,0 +1,1 @@
+export { component } from "./account-CrrTmq0F.js";

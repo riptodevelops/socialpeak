@@ -1,0 +1,1 @@
+import{o as e}from"./useSelector-C0pj3Bsi.js";import{t as a}from"./SiteChrome-BCifFRZP.js";var y=e();function Component(){return(0,y.jsx)(a,{children:(0,y.jsx)("div",{className:"mx-auto max-w-6xl px-4 py-16 text-center",children:(0,y.jsx)("p",{className:"text-muted-foreground",children:"Loading section..."})})});}export{Component as component};
