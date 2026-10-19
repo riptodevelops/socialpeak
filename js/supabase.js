@@ -1,10 +1,15 @@
 // Socialpeak.store - Supabase Integration Module
 // Handles Realtime Data Sync, Auth with Email Verification Link, Products & Orders
 
-import { createClient } from "https://esm.sh/@supabase/supabase-js@2";
-
 let supabaseClient = null;
 let initPromise = null;
+
+function getCreateClient() {
+  if (typeof window !== "undefined" && window.supabase && typeof window.supabase.createClient === "function") {
+    return window.supabase.createClient;
+  }
+  return null;
+}
 
 // Resolve Supabase Credentials from various environments
 export function getSupabaseCredentials() {
@@ -45,8 +50,13 @@ export function initSupabase(customUrl, customKey) {
     return null;
   }
 
+  const createClientFn = getCreateClient();
+  if (!createClientFn) {
+    return null;
+  }
+
   try {
-    supabaseClient = createClient(url, anonKey, {
+    supabaseClient = createClientFn(url, anonKey, {
       auth: {
         autoRefreshToken: true,
         persistSession: true,
