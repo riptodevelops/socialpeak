@@ -1,1 +1,1 @@
-/data/user/0/com.termux/files/home/.gemini/antigravity-cli/scratch/website/js/arrow-right-BlPZcO-p.js
+import{c as e}from"./SiteChrome-BCifFRZP.js";var t=e(`arrow-right`,[[`path`,{d:`M5 12h14`,key:`1ays0h`}],[`path`,{d:`m12 5 7 7-7 7`,key:`xquz4c`}]]);export{t};

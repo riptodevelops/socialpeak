@@ -1,1 +1,1 @@
-/data/user/0/com.termux/files/home/.gemini/antigravity-cli/scratch/website/js/invariant-DEEwAagU.js
+function e(){throw Error(`Invariant failed`)}export{e as t};
