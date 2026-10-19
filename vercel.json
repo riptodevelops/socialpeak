@@ -1,16 +1,11 @@
 {
-  "version": 2,
-  "cleanUrls": true,
-  "framework": null,
-  "buildCommand": null,
-  "outputDirectory": ".",
   "rewrites": [
     {
       "source": "/api/config",
       "destination": "/api/config.js"
     },
     {
-      "source": "/(.*)",
+      "source": "/((?!api|js|css|images|assets).*)",
       "destination": "/index.html"
     }
   ],
@@ -34,7 +29,7 @@
       ]
     },
     {
-      "source": "/index.html",
+      "source": "/(.*)",
       "headers": [
         {
           "key": "Cache-Control",
